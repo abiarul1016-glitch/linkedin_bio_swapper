@@ -69,12 +69,14 @@ def main():
 
             # --- Login Implementation ---
             page.goto(LINKEDIN_URL)
+            page.wait_for_timeout(3000)  # Wait for 3 seconds to allow the page to load.
             page.get_by_role("button", name="Sign in").click()
             page.get_by_role("textbox", name="Email or phone").click()
             page.get_by_role("textbox", name="Email or phone").fill(EMAIL)
             page.get_by_role("textbox", name="Password").click()
             page.get_by_role("textbox", name="Password").fill(PASSWORD)
             page.get_by_role("button", name="Sign in").click()
+            page.wait_for_timeout(5000)  # Wait for 5 seconds to allow login to process.
 
             # Recheck if login was successful by looking for the 'Me' button again.
             if not check_logged_in(page):
@@ -87,6 +89,9 @@ def main():
                 # Save current browser state after manual login attempt.
                 context.storage_state(path=BROWSER_STATE_PATH)
                 return
+
+            print("Login successful! Navigating to the bio edit page...")
+            page.goto(LINKEDIN_EDIT_BIO_URL)
 
         else:
             print("User is already logged in. Proceeding to update bio...")
