@@ -97,6 +97,7 @@ def main():
         # Save the current browser context state (cookies, local storage) for future runs.
         storage = context.storage_state(path=BROWSER_STATE_PATH)
 
+        browser.close()
 
 def get_bio_list(file_path):
     """
