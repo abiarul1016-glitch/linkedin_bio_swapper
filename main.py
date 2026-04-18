@@ -6,10 +6,7 @@ from playwright.sync_api import sync_playwright
 
 load_dotenv("secrets.env")
 
-bio_list_path = "bios_list.txt"
-
-with open(bio_list_path, "r") as f:
-    BIO_LIST = f.read().splitlines()
+BIO_LIST_PATH = "bios_list.txt"
 
 # --Configurations and Constants--
 # LINKEDIN_CREDS
@@ -36,6 +33,12 @@ def main():
     6. Save the changes and update the browser state.
     """
     print("Hello from linkedin-bio-swapper!")
+
+    if not (BIO_LIST := get_bio_list(BIO_LIST_PATH)):
+        print(
+            "No bios available to update. Please add bios to the bios_list.txt file and try again."
+        )
+        return
 
     if not human_verification(
         "Are you sure you want to change your LinkedIn bio? Type 'yes' to confirm: "
@@ -93,6 +96,30 @@ def main():
 
         # Save the current browser context state (cookies, local storage) for future runs.
         storage = context.storage_state(path=BROWSER_STATE_PATH)
+
+
+def get_bio_list(file_path):
+    """
+    Read a list of bios from a text file and return them as a list.
+
+    This function attempts to open the specified file, read its contents, and split it into lines to create a list of bios.
+    If the file is not found, it prints an error message and returns an empty list.
+
+    Args:
+        file_path (str): The path to the text file containing the bios.
+
+    Returns:
+        list: A list of bios read from the file, or an empty list if the file is not found.
+    """
+
+    try:
+        with open(file_path, "r") as f:
+            return f.read().splitlines()
+    except FileNotFoundError:
+        print(
+            f"Error: The file '{file_path}' was not found. Please ensure it exists and try again."
+        )
+        return []
 
 
 def human_verification(
