@@ -1,6 +1,14 @@
-# Swapper 🔄
+# Swapper
 
 An automation script that randomly rotates your LinkedIn headline using a curated list of bios — because nobody likes LinkedIn, but everyone needs it.
+
+---
+
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+[![Playwright](https://custom-icon-badges.demolab.com/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=fff)](#)
+![python-dotenv](https://img.shields.io/badge/python--dotenv-fff?style=for-the-badge&logo=python&logoColor=black)
+
+---
 
 ## Overview
 
